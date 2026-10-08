@@ -1,0 +1,78 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Troubleshooting</title><style>body{font:16px/1.65 system-ui,sans-serif;background:#edf2f7;color:#182437;margin:0}main{max-width:1050px;margin:36px auto;background:white;padding:46px;border-radius:16px}h1{line-height:1.2;font-size:36px}h2{margin-top:34px;color:#245e6b}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:10px;text-align:left;border-bottom:1px solid #d6e0ea}thead{background:#e7f2f4}a{color:#276b7e}code{background:#edf2f7;padding:2px 5px}pre{overflow:auto;padding:15px;background:#edf2f7}p{overflow-wrap:anywhere}@media(max-width:700px){main{margin:0;padding:22px}table{display:block;overflow-x:auto}}@media print{body{background:white}main{margin:0;padding:0}h2{break-after:avoid}tr{break-inside:avoid}}</style></head><body><main><h1>Troubleshooting</h1>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Python not found or wrong version</td>
+<td>Install 64-bit Python 3.12 with pip, launcher, and Tcl/Tk. Close and reopen the folder, then run START_WINDOWS.bat. Python 3.14 is outside this dependency set.</td>
+</tr>
+<tr>
+<td>Camera cannot open</td>
+<td>Close Camera, Teams, Zoom, and other camera apps. Enable Settings → Privacy &amp; security → Camera → Camera access and Let desktop apps access your camera. Try camera 1 or 2 in the launcher.</td>
+</tr>
+<tr>
+<td>First run cannot download packages</td>
+<td>Check internet access. Retry START_WINDOWS.bat. On a restricted school laptop, ask the administrator for ordinary package-install or camera access.</td>
+</tr>
+<tr>
+<td>School policy blocks the PowerShell launcher</td>
+<td>Use a terminal with the manual setup below; follow your school&#39;s execution policy.</td>
+</tr>
+<tr>
+<td>Tkinter is missing</td>
+<td>Modify the Python installation to include Tcl/Tk. The direct CLI <code>python -m emotion_app run --demo</code> can still run without Tk if OpenCV GUI support works.</td>
+</tr>
+<tr>
+<td>OpenCV GUI error</td>
+<td>Use opencv-python, not opencv-python-headless. Remove conflicting OpenCV variants from the environment, or recreate <code>.venv</code>.</td>
+</tr>
+<tr>
+<td>Too dark / too bright / blurred</td>
+<td>Put light in front of your face, reduce backlighting/glare, clean the camera, sit closer, and keep your face frontal.</td>
+</tr>
+<tr>
+<td>No face detected</td>
+<td>Face the camera, avoid extreme angles or obstruction, and ensure the face occupies at least roughly 80 pixels across. Haar detection can miss faces.</td>
+</tr>
+<tr>
+<td>Multiple faces</td>
+<td>Keep only the person being classified in frame. This app intentionally pauses classification with multiple people.</td>
+</tr>
+<tr>
+<td>Prediction flickers or gets Sad/Neutral wrong</td>
+<td>Train a personal model from at least five varied sessions. Add fresh labeled sessions. A synthetic classifier cannot establish real webcam accuracy.</td>
+</tr>
+<tr>
+<td>Training says five sessions are required</td>
+<td>Finish all three labels before exiting collection. Repeat the recording button five separate times; 375 rows is the default total.</td>
+</tr>
+<tr>
+<td>Personal model or CSV is corrupt</td>
+<td>Back up the file. Rename <code>data/personal.csv</code> to restart data collection, or retrain <code>models/personal.json</code>. The app never silently overwrites an incompatible dataset.</td>
+</tr>
+<tr>
+<td>Launcher seems busy</td>
+<td>Finish the current camera task with Q. Only one task runs at a time. If you close the launcher during a task, it waits for that task to finish so writes and camera cleanup complete normally.</td>
+</tr>
+<tr>
+<td>Dependencies become broken</td>
+<td>Delete only the project&#39;s <code>.venv</code> folder, then rerun START_WINDOWS.bat. Keep <code>data</code>, <code>models</code>, and <code>reports</code> to preserve your work.</td>
+</tr>
+</tbody></table>
+<p>Manual Windows setup, from the extracted project folder:</p>
+<pre><code class="language-powershell">py -3.12 -m venv .venv
+.venv\Scripts\python -m pip install --only-binary=:all: -r requirements.txt
+.venv\Scripts\python -m emotion_app doctor
+.venv\Scripts\python -m emotion_app gui
+</code></pre>
+<p>Logs are in <code>logs/app.log</code> with two rotating backups. They record operational
+errors and timings, not camera frames. When requesting help, provide the error
+and Python/OpenCV versions, not your personal dataset or recorded video.</p>
+<p>To delete personal training information, exit all tasks and delete
+<code>data/personal.csv</code>, <code>models/personal.json</code>, and <code>reports/personal/</code>.
+Delete any explicit video exports you created separately.</p>
+</main></body></html>

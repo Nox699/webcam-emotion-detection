@@ -1,0 +1,108 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Test report — Expression Lab 1.0.1</title><style>body{font:16px/1.65 system-ui,sans-serif;background:#edf2f7;color:#182437;margin:0}main{max-width:1050px;margin:36px auto;background:white;padding:46px;border-radius:16px}h1{line-height:1.2;font-size:36px}h2{margin-top:34px;color:#245e6b}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:10px;text-align:left;border-bottom:1px solid #d6e0ea}thead{background:#e7f2f4}a{color:#276b7e}code{background:#edf2f7;padding:2px 5px}pre{overflow:auto;padding:15px;background:#edf2f7}p{overflow-wrap:anywhere}@media(max-width:700px){main{margin:0;padding:22px}table{display:block;overflow-x:auto}}@media print{body{background:white}main{margin:0;padding:0}h2{break-after:avoid}tr{break-inside:avoid}}</style></head><body><main><h1>Test report — Expression Lab 1.0.1</h1>
+<h2>Executed environment</h2>
+<ul>
+<li>Remote Linux, x86-64, Python 3.12.14</li>
+<li>OpenCV 4.12.0.88 (cv2 reports 4.12.0)</li>
+<li>NumPy 2.2.6, Pandas 2.2.3</li>
+<li>scikit-learn 1.7.2, SciPy 1.15.3, Matplotlib 3.10.8</li>
+<li>Exact pinned requirements; tests use Python&#39;s unittest, no extra test package</li>
+</ul>
+<h2>Completed checks</h2>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Automated unit/integration suite</td>
+<td>48 tests passed</td>
+<td>reports/software-tests.txt</td>
+</tr>
+<tr>
+<td>Simulated training, seed 42</td>
+<td>1,920 training / 480 test samples; 87.71% accuracy</td>
+<td>reports/demo/metrics.json</td>
+</tr>
+<tr>
+<td>JSON deployment inference</td>
+<td>Matches sklearn probabilities to numerical precision</td>
+<td>ModelTests.test_json_inference_matches_sklearn</td>
+</tr>
+<tr>
+<td>Leakage checks</td>
+<td>Scaler fits training only; personal train/test session IDs disjoint</td>
+<td>ModelTests and DataTests</td>
+</tr>
+<tr>
+<td>Personal-mode training path</td>
+<td>Trains, evaluates, serializes, predicts using a generated test-only 902-feature fixture</td>
+<td>ModelTests.test_personal_training_and_holdout_model</td>
+</tr>
+<tr>
+<td>Actual face-image extraction</td>
+<td>Haar finds one face; real 902-element feature vector is deterministic and finite</td>
+<td>VisionTests.test_real_image_face_and_hog_features</td>
+</tr>
+<tr>
+<td>Camera error/cleanup paths</td>
+<td>Failures and Q exit release resources; mocked Windows fallback succeeds</td>
+<td>CameraTests</td>
+</tr>
+<tr>
+<td>Offline decode → detect → predict → annotate → encode</td>
+<td>Valid annotated AVI with expected frame dimensions/count</td>
+<td>CameraTests.test_actual_video_end_to_end_and_max_frames</td>
+</tr>
+<tr>
+<td>100-frame offline video benchmark</td>
+<td>Approximately 44 FPS; approximately 14 ms mean analysis</td>
+<td>reports/video_integration.json</td>
+</tr>
+<tr>
+<td>CLI train and doctor</td>
+<td>Exit 0 and expected artifacts/diagnostics</td>
+<td>ReportAndCliTests</td>
+</tr>
+<tr>
+<td>Python compilation / shell syntax</td>
+<td>Passed</td>
+<td>compileall and bash -n</td>
+</tr>
+<tr>
+<td>Pinned Windows x64 / Python 3.12 dependencies</td>
+<td>Binary-wheel resolution succeeded for all 19 pinned packages</td>
+<td>reports/windows_dependency_check.json (pip dry-run resolver)</td>
+</tr>
+<tr>
+<td>Preview layout and confusion chart</td>
+<td>Rendered and visually inspected</td>
+<td>docs/camera_preview.png, docs/collection_preview.png, reports/demo/confusion_matrix.png</td>
+</tr>
+</tbody></table>
+<p>The generated personal test fixture validates code paths only. It is not real
+labeled human-expression training data, and its classifier score is not
+reported as webcam accuracy. The NASA face fixture has no expression label.</p>
+<h2>Windows launcher fix in 1.0.1</h2>
+<p>The Python version/bitness check previously passed inline code through Windows
+PowerShell. The reported Windows run stripped its string quotes and raised
+<code>NameError: name P is not defined</code>. Version 1.0.1 runs that check from
+<code>scripts/check_runtime.py</code>, and uses the same file for Python discovery.
+Six new regression tests cover supported versions, incorrect bitness,
+nonzero failure exits, a script filename with spaces, and elimination of
+inline Python code from the PowerShell launcher. These tests run here; actual
+Windows execution remains a local acceptance check.</p>
+<h2>Validation still requiring the laptop</h2>
+<ul>
+<li>Actual Windows batch/PowerShell execution and Tkinter GUI interactions</li>
+<li>Physical webcam index, backend, permissions, camera contention, and reconnect</li>
+<li>Real labeled data collection and personalized expression performance</li>
+<li>Real-time display FPS, CPU use, and long-run behavior on the target hardware</li>
+</ul>
+<p>The Windows bootstrap and fallback branches are inspected/tested where
+possible; cross-platform wheel resolution is not equivalent to executing
+the app on Windows. Follow LOCAL_ACCEPTANCE.md and run TEST_WINDOWS.bat before
+describing the product as fully validated for that laptop.</p>
+</main></body></html>

@@ -1,0 +1,103 @@
+{
+  "target": "Windows x64 / Python 3.12",
+  "method": "pip binary-only cross-platform dry-run resolution",
+  "result": "passed",
+  "note": "Package resolution only; Windows execution and physical webcam were not tested.",
+  "packages": [
+    {
+      "name": "opencv-python",
+      "version": "4.12.0.88",
+      "wheel": "opencv_python-4.12.0.88-cp37-abi3-win_amd64.whl"
+    },
+    {
+      "name": "numpy",
+      "version": "2.2.6",
+      "wheel": "numpy-2.2.6-cp312-cp312-win_amd64.whl"
+    },
+    {
+      "name": "pandas",
+      "version": "2.2.3",
+      "wheel": "pandas-2.2.3-cp312-cp312-win_amd64.whl"
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.7.2",
+      "wheel": "scikit_learn-1.7.2-cp312-cp312-win_amd64.whl"
+    },
+    {
+      "name": "scipy",
+      "version": "1.15.3",
+      "wheel": "scipy-1.15.3-cp312-cp312-win_amd64.whl"
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.10.8",
+      "wheel": "matplotlib-3.10.8-cp312-cp312-win_amd64.whl"
+    },
+    {
+      "name": "contourpy",
+      "version": "1.3.3",
+      "wheel": "contourpy-1.3.3-cp312-cp312-win_amd64.whl"
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1",
+      "wheel": "cycler-0.12.1-py3-none-any.whl"
+    },
+    {
+      "name": "fonttools",
+      "version": "4.59.0",
+      "wheel": "fonttools-4.59.0-cp312-cp312-win_amd64.whl"
+    },
+    {
+      "name": "joblib",
+      "version": "1.5.2",
+      "wheel": "joblib-1.5.2-py3-none-any.whl"
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.4.9",
+      "wheel": "kiwisolver-1.4.9-cp312-cp312-win_amd64.whl"
+    },
+    {
+      "name": "packaging",
+      "version": "25.0",
+      "wheel": "packaging-25.0-py3-none-any.whl"
+    },
+    {
+      "name": "pillow",
+      "version": "11.3.0",
+      "wheel": "pillow-11.3.0-cp312-cp312-win_amd64.whl"
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.2.3",
+      "wheel": "pyparsing-3.2.3-py3-none-any.whl"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "wheel": "python_dateutil-2.9.0.post0-py2.py3-none-any.whl"
+    },
+    {
+      "name": "pytz",
+      "version": "2025.2",
+      "wheel": "pytz-2025.2-py2.py3-none-any.whl"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "wheel": "six-1.17.0-py2.py3-none-any.whl"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.6.0",
+      "wheel": "threadpoolctl-3.6.0-py3-none-any.whl"
+    },
+    {
+      "name": "tzdata",
+      "version": "2025.2",
+      "wheel": "tzdata-2025.2-py2.py3-none-any.whl"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "frames": 100,
+  "elapsed_seconds": 2.270195392000005,
+  "throughput_fps": 44.04907187830279,
+  "mean_analysis_ms": 13.838942130023497,
+  "p95_analysis_ms": 17.560177299810675,
+  "p95_window_frames": 100,
+  "display_counts": {
+    "Looking for a face": 10,
+    "Happy": 90
+  },
+  "input": "video file",
+  "model_source": "simulated",
+  "note": "Processing speed is environment-specific. P95 uses at most the last 10,000 frames. This is not an emotion accuracy test."
+}

@@ -1,0 +1,53 @@
+test_actual_video_end_to_end_and_max_frames (test_app.CameraTests.test_actual_video_end_to_end_and_max_frames) ... ok
+test_bad_camera_index_and_missing_video (test_app.CameraTests.test_bad_camera_index_and_missing_video) ... ok
+test_doctor_releases_camera (test_app.CameraTests.test_doctor_releases_camera) ... ok
+test_exception_during_processing_releases_camera (test_app.CameraTests.test_exception_during_processing_releases_camera) ... ok
+test_failed_open_releases_camera (test_app.CameraTests.test_failed_open_releases_camera) ... ok
+test_headless_webcam_requires_frame_limit (test_app.CameraTests.test_headless_webcam_requires_frame_limit) ... ok
+test_output_cannot_overwrite_input_and_requires_avi (test_app.CameraTests.test_output_cannot_overwrite_input_and_requires_avi) ... ok
+test_q_key_releases_camera_and_window (test_app.CameraTests.test_q_key_releases_camera_and_window) ... ok
+test_windows_backend_fallback_releases_failed_device (test_app.CameraTests.test_windows_backend_fallback_releases_failed_device) ... ok
+test_atomic_append_and_duplicate_protection (test_app.CollectionTests.test_atomic_append_and_duplicate_protection) ... ok
+test_countdown_spacing_and_completion (test_app.CollectionTests.test_countdown_spacing_and_completion) ... ok
+test_incomplete_session_not_saved (test_app.CollectionTests.test_incomplete_session_not_saved) ... ok
+test_invalid_collection_size (test_app.CollectionTests.test_invalid_collection_size) ... ok
+test_missing_personal_file_explained (test_app.DataTests.test_missing_personal_file_explained) ... ok
+test_personal_holdout_has_no_session_leakage (test_app.DataTests.test_personal_holdout_has_no_session_leakage) ... ok
+test_rejects_nan_and_invalid_labels_and_bounds (test_app.DataTests.test_rejects_nan_and_invalid_labels_and_bounds) ... ok
+test_rejects_wrong_schema (test_app.DataTests.test_rejects_wrong_schema) ... ok
+test_requires_five_complete_sessions (test_app.DataTests.test_requires_five_complete_sessions) ... ok
+test_simulation_is_balanced_bounded_and_reproducible (test_app.DataTests.test_simulation_is_balanced_bounded_and_reproducible) ... ok
+test_synthetic_split_is_stratified_80_20 (test_app.DataTests.test_synthetic_split_is_stratified_80_20) ... ok
+test_json_inference_matches_sklearn (test_app.ModelTests.test_json_inference_matches_sklearn) ... ok
+test_metrics_match_predictions (test_app.ModelTests.test_metrics_match_predictions) ... ok
+test_personal_training_and_holdout_model (test_app.ModelTests.test_personal_training_and_holdout_model) ... ok
+test_probabilities_are_normalized (test_app.ModelTests.test_probabilities_are_normalized) ... ok
+test_rejects_bad_prediction_inputs (test_app.ModelTests.test_rejects_bad_prediction_inputs) ... ok
+test_rejects_corrupt_dimensions_scale_and_schema (test_app.ModelTests.test_rejects_corrupt_dimensions_scale_and_schema) ... ok
+test_rejects_invalid_json_and_missing_model (test_app.ModelTests.test_rejects_invalid_json_and_missing_model) ... ok
+test_roundtrip_json_is_equivalent (test_app.ModelTests.test_roundtrip_json_is_equivalent) ... ok
+test_scaler_uses_only_training_subset (test_app.ModelTests.test_scaler_uses_only_training_subset) ... ok
+test_atomic_writes_do_not_leave_temporary_files (test_app.ReportAndCliTests.test_atomic_writes_do_not_leave_temporary_files) ... ok
+test_cli_rejects_invalid_confidence (test_app.ReportAndCliTests.test_cli_rejects_invalid_confidence) ... ok
+test_cli_training_and_doctor (test_app.ReportAndCliTests.test_cli_training_and_doctor) ... ok
+test_report_is_self_contained_and_matches_metrics (test_app.ReportAndCliTests.test_report_is_self_contained_and_matches_metrics) ... ok
+test_analysis_suppresses_no_multiple_and_poor_faces (test_app.VisionTests.test_analysis_suppresses_no_multiple_and_poor_faces) ... ok
+test_blank_image_has_no_face (test_app.VisionTests.test_blank_image_has_no_face) ... ok
+test_dark_and_blurry_quality_gates (test_app.VisionTests.test_dark_and_blurry_quality_gates) ... ok
+test_overlap (test_app.VisionTests.test_overlap) ... ok
+test_real_image_face_and_hog_features (test_app.VisionTests.test_real_image_face_and_hog_features) ... ok
+test_rejects_invalid_image_and_box (test_app.VisionTests.test_rejects_invalid_image_and_box) ... ok
+test_renderer_layout_and_mirror (test_app.VisionTests.test_renderer_layout_and_mirror) ... ok
+test_smoother_resets_on_face_change_and_loss (test_app.VisionTests.test_smoother_resets_on_face_change_and_loss) ... ok
+test_threshold_yields_uncertain (test_app.VisionTests.test_threshold_yields_uncertain) ... ok
+test_32_bit_runtime_has_clear_error (test_bootstrap.BootstrapTests.test_32_bit_runtime_has_clear_error) ... ok
+test_check_executes_from_a_path_with_spaces (test_bootstrap.BootstrapTests.test_check_executes_from_a_path_with_spaces) ... ok
+test_failure_returns_nonzero (test_bootstrap.BootstrapTests.test_failure_returns_nonzero) ... ok
+test_powershell_uses_the_script_for_every_runtime_probe (test_bootstrap.BootstrapTests.test_powershell_uses_the_script_for_every_runtime_probe) ... ok
+test_supported_64_bit_versions (test_bootstrap.BootstrapTests.test_supported_64_bit_versions) ... ok
+test_unsupported_versions_have_clear_errors (test_bootstrap.BootstrapTests.test_unsupported_versions_have_clear_errors) ... ok
+
+----------------------------------------------------------------------
+Ran 48 tests in 3.604s
+
+OK

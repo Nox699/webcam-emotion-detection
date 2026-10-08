@@ -1,0 +1,36 @@
+2026-10-08 11:42:29,244 INFO Opened camera 0, backend DSHOW, 640x480
+2026-10-08 11:43:22,696 INFO Opened camera 0, backend DSHOW, 640x480
+2026-10-08 11:43:46,113 INFO Incomplete session discarded; existing data is unchanged.
+2026-10-08 11:43:54,554 INFO generated new fontManager
+2026-10-08 11:43:55,086 ERROR Operation failed
+Traceback (most recent call last):
+  File "C:\emotion-webcam\emotion_app\__main__.py", line 78, in main
+    frame = read_personal(arguments.data or PERSONAL_DATA)
+  File "C:\emotion-webcam\emotion_app\data.py", line 68, in read_personal
+    raise ValueError("No personal dataset yet. Record a complete session first.")
+ValueError: No personal dataset yet. Record a complete session first.
+2026-10-08 11:44:05,211 ERROR Operation failed
+Traceback (most recent call last):
+  File "C:\emotion-webcam\emotion_app\__main__.py", line 99, in main
+    stats = run_webcam(EmotionModel.load(model_path), camera=arguments.camera, video=arguments.video,
+                       ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\emotion-webcam\emotion_app\model.py", line 57, in load
+    raise ValueError(f"Model is missing: {path.name}. Train it first.")
+ValueError: Model is missing: personal.json. Train it first.
+2026-10-08 11:44:20,388 INFO Opened camera 0, backend DSHOW, 640x480
+2026-10-08 11:46:06,221 ERROR Operation failed
+Traceback (most recent call last):
+  File "C:\emotion-webcam\emotion_app\__main__.py", line 83, in main
+    model, metrics, _ = train(frame, arguments.personal, arguments.seed)
+                        ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\emotion-webcam\emotion_app\model.py", line 82, in train
+    train_indices, test_indices = split_dataset(frame, personal, seed)
+                                  ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\emotion-webcam\emotion_app\data.py", line 56, in split_dataset
+    validate_dataset(frame, features, personal)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\emotion-webcam\emotion_app\data.py", line 47, in validate_dataset
+    raise ValueError("Collect at least 5 separate complete sessions before training. "
+                     "One session contains all 3 expressions.")
+ValueError: Collect at least 5 separate complete sessions before training. One session contains all 3 expressions.
+2026-10-08 11:46:55,971 INFO Opened camera 0, backend DSHOW, 640x480

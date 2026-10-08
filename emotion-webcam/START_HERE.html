@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Expression Lab — Start here</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#101820;color:#e9f1f7;font:16px/1.65 system-ui,Segoe UI,sans-serif}
+main{max-width:1100px;margin:auto;padding:48px 28px 70px}.tag{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:#8ee3ca}
+h1{font-size:clamp(38px,6vw,68px);line-height:1.1;margin:18px 0}h2{font-size:28px;margin-top:44px}.intro{font-size:21px;color:#b4c1ce;max-width:770px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0}.card{background:#1c2935;border:1px solid #334654;border-radius:16px;padding:24px}
+.step{color:#8ee3ca;font-size:14px}h3{margin:10px 0;font-size:21px}.notice{background:#302c20;border-left:4px solid #e8c978;padding:20px;border-radius:8px}
+a{color:#8ee3ca}code{background:#2b3946;padding:3px 6px;border-radius:5px;font-size:.95em}img{width:100%;border-radius:14px;border:1px solid #34414e;margin-top:20px}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:13px;border-bottom:1px solid #334654}small{color:#aeb9c5}li{margin:10px 0}
+@media(max-width:760px){.cards{grid-template-columns:1fr}main{padding:28px 20px}table{font-size:14px}}
+</style>
+</head>
+<body><main>
+<div class="tag">Supervised learning · Your laptop's webcam</div>
+<h1>Expression Lab</h1>
+<p class="intro">A local Python app for Happy, Neutral, and Sad facial-expression classification, with labeled recording, model training, and a clear evaluation report.</p>
+<div class="cards">
+<section class="card"><div class="step">01 / Install</div><h3>Get Python</h3><p>Install <b>64-bit Python 3.12</b> with pip, the launcher, and Tcl/Tk. Python 3.11 or 3.13 also works with this dependency set.</p><a href="https://www.python.org/downloads/windows/">Official Windows downloads</a></section>
+<section class="card"><div class="step">02 / Launch</div><h3>Extract and open</h3><p>Extract the whole ZIP into a writable folder. Double-click <code>START_WINDOWS.bat</code>. First-time dependency setup needs internet.</p></section>
+<section class="card"><div class="step">03 / Try</div><h3>Open the demo</h3><p>Click <b>Open assignment demo</b>. Use your camera in good light. Click its window and press <b>Q</b> when finished.</p></section>
+</div>
+<p class="notice"><b>The distinction that matters:</b> the bundled model scores 87.71% on simulated test data. This does not establish webcam accuracy. Record your own labeled sessions to train and evaluate a personal model.</p>
+<img src="docs/camera_preview.png" alt="Expression Lab camera interface with face rectangle and model score bars">
+<small>Offline-rendered preview using a public-domain NASA image; the picture is an integration fixture without an emotion ground-truth label. The example FPS counter is illustrative.</small>
+<h2>Train for your webcam</h2>
+<ol>
+<li>Click <b>Record labeled session</b>. Pose the displayed Happy, Neutral, or Sad expression, press <b>SPACE</b>, and wait through the two-second countdown.</li>
+<li>Hold the pose while 25 numerical feature samples are collected. Follow all three prompts; a complete session saves 75 rows. Q cancels an incomplete session.</li>
+<li>Repeat for <b>at least five complete sessions</b>. Take a break or change light/position slightly between them. One person should remain visible.</li>
+<li>Click <b>Train my webcam model</b>, then <b>Open evaluation report</b>. Whole sessions are held out for evaluation.</li>
+<li>Click <b>Run my webcam model</b>. Check it on fresh, independently posed expressions and record the results for your assignment.</li>
+</ol>
+<img src="docs/collection_preview.png" alt="Labeled feature collection interface with sample progress and Space prompt">
+<h2>Controls</h2><table>
+<tr><th>Key</th><th>Action</th></tr><tr><td>Q / Esc</td><td>Exit the camera view and release the webcam.</td></tr>
+<tr><td>SPACE</td><td>Start capture for the displayed label during recording.</td></tr><tr><td>M</td><td>Toggle mirrored preview.</td></tr><tr><td>R</td><td>Reset smoothing during prediction.</td></tr>
+</table>
+<p>Uncertain means the classifier score is below the threshold. Poor image quality or multiple faces pauses prediction. These expression labels and model scores do not measure your internal emotional state.</p>
+<h2>Test and submit</h2>
+<p>Run <code>TEST_WINDOWS.bat</code> for the bundled software checks, and <b>Check camera</b> in the launcher for hardware diagnostics. Complete the local webcam checklist before claiming that laptop testing is complete.</p>
+<ul><li><a href="reports/demo/evaluation.html">Measured simulated-data evaluation</a></li>
+<li><a href="docs/ASSIGNMENT_REPORT.html">Assignment report with results and discussion</a></li>
+<li><a href="docs/TEST_REPORT.html">Software test report and validation limits</a></li>
+<li><a href="docs/LOCAL_ACCEPTANCE.html">Local Windows and webcam checklist</a></li>
+<li><a href="docs/TROUBLESHOOTING.html">Troubleshooting and manual setup</a></li></ul>
+<h2>Your data stays local</h2><p>The normal collection flow saves numerical facial features, labels, and session metadata. It saves no camera photos, video, or audio and transmits no camera data. Explicit video export is available only through the CLI. Protect your personal feature dataset as face-derived information.</p>
+</main></body></html>

@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Local Windows webcam acceptance checklist</title><style>body{font:16px/1.65 system-ui,sans-serif;background:#edf2f7;color:#182437;margin:0}main{max-width:1050px;margin:36px auto;background:white;padding:46px;border-radius:16px}h1{line-height:1.2;font-size:36px}h2{margin-top:34px;color:#245e6b}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:10px;text-align:left;border-bottom:1px solid #d6e0ea}thead{background:#e7f2f4}a{color:#276b7e}code{background:#edf2f7;padding:2px 5px}pre{overflow:auto;padding:15px;background:#edf2f7}p{overflow-wrap:anywhere}@media(max-width:700px){main{margin:0;padding:22px}table{display:block;overflow-x:auto}}@media print{body{background:white}main{margin:0;padding:0}h2{break-after:avoid}tr{break-inside:avoid}}</style></head><body><main><h1>Local Windows webcam acceptance checklist</h1>
+<p>These checks need the actual laptop. They have not been represented as completed
+by tests run on the remote Linux environment.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Expected result</th>
+<th>Local result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Extract ZIP to a folder with spaces in its name</td>
+<td>START_WINDOWS.bat resolves the project and builds <code>.venv</code></td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>First launch with supported Python installed</td>
+<td>Dependencies install and launcher opens</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Second launch without internet</td>
+<td>Existing launcher/model operate locally</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>TEST_WINDOWS.bat</td>
+<td>All bundled software tests pass</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Check camera, index 0 (or correct alternate)</td>
+<td>Diagnostic prints resolution, backend, and success</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Assignment demo</td>
+<td>Video, face rectangle, scores, and SYNTHETIC DEMO badge appear</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Q, Esc, and close camera window</td>
+<td>App returns to launcher; other apps can reopen camera</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>M</td>
+<td>Preview mirrors; inference orientation remains consistent</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Face leaves frame</td>
+<td>Label returns to Looking for a face; previous scores clear</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Two faces enter frame</td>
+<td>Multiple faces; prediction pauses</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Very poor light</td>
+<td>Quality warning and suppressed scores</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Cancel partial collection with Q</td>
+<td>Existing data is unchanged; incomplete session is discarded</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Complete five labeled sessions</td>
+<td>375 default rows, five unique sessions, all three classes in each</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Train personal model</td>
+<td>Report and personal.json created; train/test sessions are disjoint</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>New sixth session / independent recording</td>
+<td>Document measured expression accuracy without assuming the synthetic result applies</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Camera unplug/disable or already occupied</td>
+<td>Helpful failure; app exits and releases resources</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>Typical lighting, 10-minute run</td>
+<td>Record mean FPS, label consistency, CPU use, and any drops</td>
+<td>Pending</td>
+</tr>
+</tbody></table>
+<p>For a small live labeled evaluation: independently pose each expression 10
+times, wait about one second after each pose to let smoothing settle, and
+record the displayed prediction (including Uncertain). Keep the model and
+threshold fixed. Report overall accuracy, rejection rate, per-class errors,
+lighting, resolution, person, and number of trials. Thirty poses provide only
+a small preliminary check, not broad generalization evidence.</p>
+<p>Fill in the live evaluation section of ASSIGNMENT_REPORT.md after this check.</p>
+</main></body></html>

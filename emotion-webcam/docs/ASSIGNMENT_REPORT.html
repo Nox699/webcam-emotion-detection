@@ -1,0 +1,308 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Real-Time Emotion Detection Using Supervised Learning</title><style>body{font:16px/1.65 system-ui,sans-serif;background:#edf2f7;color:#182437;margin:0}main{max-width:1050px;margin:36px auto;background:white;padding:46px;border-radius:16px}h1{line-height:1.2;font-size:36px}h2{margin-top:34px;color:#245e6b}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:10px;text-align:left;border-bottom:1px solid #d6e0ea}thead{background:#e7f2f4}a{color:#276b7e}code{background:#edf2f7;padding:2px 5px}pre{overflow:auto;padding:15px;background:#edf2f7}p{overflow-wrap:anywhere}@media(max-width:700px){main{margin:0;padding:22px}table{display:block;overflow-x:auto}}@media print{body{background:white}main{margin:0;padding:0}h2{break-after:avoid}tr{break-inside:avoid}}</style></head><body><main><h1>Real-Time Emotion Detection Using Supervised Learning</h1>
+<p><strong>Course topic:</strong> Machine Learning — Supervised Learning<br><strong>Project:</strong> Expression Lab, version 1.0.1<br><strong>Target:</strong> Windows laptop with built-in webcam<br><strong>Student name / class / submission date:</strong> Complete before submission</p>
+<h2>1. Introduction and objective</h2>
+<p>The assignment requires a supervised classifier for Happy, Sad, and Neutral,
+connected to a real-time camera stream. This implementation uses Python,
+OpenCV, Pandas, NumPy, scikit-learn, and Matplotlib. The Raspberry Pi camera
+scenario is adapted to the requested laptop webcam through OpenCV
+VideoCapture. A native desktop launcher provides access to demonstration,
+collection, training, evaluation, and camera diagnostics.</p>
+<p>The system predicts a visible facial-expression label. It cannot reliably
+infer a person&#39;s internal emotional state from a face. This distinction is
+especially important when interpreting synthetic-data accuracy.</p>
+<h2>2. Supervised-learning theory</h2>
+<p>Each labeled example consists of input features <strong>X</strong> and a target class <strong>y</strong>.
+The classifier learns parameters that associate the features with the class.
+Unseen test samples estimate how well that learned association generalizes
+within the evaluated data distribution.</p>
+<p>Multiclass logistic regression computes a score for each class from scaled
+features, converts the scores to probabilities with softmax, and predicts
+the largest score. StandardScaler subtracts the training mean and divides
+by the training standard deviation. It is fit only on training data to avoid
+information leakage. Regularization limits excessively large coefficients.</p>
+<h2>3. Assignment-task implementation</h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Implementation</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. Import libraries</td>
+<td>Pandas/NumPy for data; sklearn for training and metrics; Matplotlib for charts; cv2 for camera and Haar detection</td>
+<td>Source modules and requirements.txt</td>
+</tr>
+<tr>
+<td>2. Simulated dataset</td>
+<td>800 labeled samples per class, 2,400 total, in a Pandas DataFrame; overlapping normalized eye/smile feature distributions</td>
+<td>reports/demo/simulated_dataset.csv</td>
+</tr>
+<tr>
+<td>2. Training/testing split</td>
+<td>Seeded stratified 80/20 split: 1,920 training and 480 test rows</td>
+<td>reports/demo/metrics.json with exact indices</td>
+</tr>
+<tr>
+<td>3. Supervised model</td>
+<td>StandardScaler + multiclass LogisticRegression</td>
+<td>emotion_app/model.py; models/demo.json</td>
+</tr>
+<tr>
+<td>3. Evaluation</td>
+<td>Accuracy, class precision/recall/F1, macro/weighted metrics, confusion matrix</td>
+<td>reports/demo/evaluation.html</td>
+</tr>
+<tr>
+<td>4. Webcam capture</td>
+<td>OpenCV VideoCapture, Windows backend fallback, 640×480 requested capture</td>
+<td>emotion_app/camera.py</td>
+</tr>
+<tr>
+<td>4. Face and features</td>
+<td>Frontal-face Haar cascade, face ROI, Haar eye/smile proxies; optional HOG appearance features</td>
+<td>emotion_app/vision.py</td>
+</tr>
+<tr>
+<td>4. Prediction and display</td>
+<td>Model inference, smoothed scores, face rectangle, label and live FPS</td>
+<td>Camera interface and offline integration output</td>
+</tr>
+<tr>
+<td>4. Exit</td>
+<td>Q, Esc, or camera-window close; camera and writer cleanup in finally blocks</td>
+<td>Automated Q/exception cleanup tests</td>
+</tr>
+<tr>
+<td>5. Discussion</td>
+<td>Measured synthetic results, measured offline processing speed, limits, local checklist, future improvements</td>
+<td>This report; MODEL_CARD.md and TEST_REPORT.md</td>
+</tr>
+</tbody></table>
+<h2>4. Dataset preparation</h2>
+<p>The simulated dataset has two normalized features: eye-openness proxy and
+smile-intensity proxy. Gaussian means are Happy=(0.72, 0.82),
+Neutral=(0.62, 0.36), and Sad=(0.34, 0.15), with standard deviations
+(0.14, 0.16). Values are clipped to [0, 1]. The intentional distribution
+overlap makes the problem nontrivial. The seed is 42, allowing reproduction.</p>
+<p>These values are illustrative assumptions, not measured facial landmarks.
+The synthetic feature distribution is not calibrated to the Haar estimates
+from a real webcam. Therefore even a high synthetic test accuracy would not
+demonstrate correct real-world expression recognition.</p>
+<p>The optional personal workflow replaces simulation with explicitly labeled
+webcam features. Each session records all three posed expressions in shuffled
+order, with a two-second preparation countdown and default 0.4-second sample
+spacing. Twenty-five rows per class gives 75 rows per session. Collection saves
+only complete sessions, and stores numerical features rather than images.</p>
+<p>At least five sessions are required for personal training. An 80/20 session
+split keeps neighboring frames together. Five equal-size default sessions
+give 300 training and 75 test rows. This reduces frame-level leakage but does
+not eliminate correlations or establish person-independent generalization.</p>
+<h2>5. Algorithm and feature extraction</h2>
+<p>Logistic regression was selected because it directly meets Option A,
+is understandable for a supervised-learning course, supports multiclass
+scores, and runs efficiently on a laptop. The model uses lbfgs, balanced
+class weights, max_iter=2000, and C=1 for simulated data. The personal model
+uses stronger regularization, C=0.2, because it has many more features.</p>
+<p>The camera workflow detects a frontal face using an OpenCV Haar cascade,
+extracts its region, and equalizes a 96×96 grayscale representation for eye
+and smile detection. Detected eye rectangle proportions and smile width
+produce two rough feature proxies. Eye rectangles are not true eyelid
+measurements, and undetected eyes use a fixed fallback value of 0.35.</p>
+<p>The personal model adds 900 Histogram of Oriented Gradients features from
+a 48×48 CLAHE-preprocessed face. These features describe image gradients
+and allow real labeled appearance data to influence the classifier. Training
+and inference share exactly the same extractor version and feature order.</p>
+<p>The deployed model uses validated numeric JSON parameters, so loading does
+not execute pickle data or depend on sklearn object-serialization compatibility.
+JSON probabilities are tested against sklearn.predict_proba. The exact
+held-out evaluated model is deployed without refitting on the test data.</p>
+<h2>6. Measured model performance</h2>
+<p><strong>Synthetic held-out test accuracy: 87.71% (421 / 480 correct).</strong></p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th align="right">Precision</th>
+<th align="right">Recall</th>
+<th align="right">F1-score</th>
+<th align="right">Test support</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Happy</td>
+<td align="right">0.916</td>
+<td align="right">0.881</td>
+<td align="right">0.898</td>
+<td align="right">160</td>
+</tr>
+<tr>
+<td>Neutral</td>
+<td align="right">0.810</td>
+<td align="right">0.825</td>
+<td align="right">0.817</td>
+<td align="right">160</td>
+</tr>
+<tr>
+<td>Sad</td>
+<td align="right">0.908</td>
+<td align="right">0.925</td>
+<td align="right">0.916</td>
+<td align="right">160</td>
+</tr>
+<tr>
+<td>Macro average</td>
+<td align="right">0.878</td>
+<td align="right">0.877</td>
+<td align="right">0.877</td>
+<td align="right">480</td>
+</tr>
+<tr>
+<td>Weighted average</td>
+<td align="right">0.878</td>
+<td align="right">0.877</td>
+<td align="right">0.877</td>
+<td align="right">480</td>
+</tr>
+</tbody></table>
+<p>Confusion matrix (rows are true labels; columns are predictions):</p>
+<table>
+<thead>
+<tr>
+<th>True / Predicted</th>
+<th align="right">Happy</th>
+<th align="right">Neutral</th>
+<th align="right">Sad</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Happy</td>
+<td align="right">141</td>
+<td align="right">19</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>Neutral</td>
+<td align="right">13</td>
+<td align="right">132</td>
+<td align="right">15</td>
+</tr>
+<tr>
+<td>Sad</td>
+<td align="right">0</td>
+<td align="right">12</td>
+<td align="right">148</td>
+</tr>
+</tbody></table>
+<p>Neutral has the weakest performance because its assumed distributions overlap
+with both other classes. Precision measures the proportion of predictions of a
+class that are correct. Recall measures the proportion of actual examples of
+a class that are recovered. F1 balances precision and recall. Because the
+test set is class-balanced, macro and weighted averages coincide here.</p>
+<p>Inference on a fixed input is deterministic. Temporal smoothing reduces
+changes between neighboring webcam frames, but consistency and correctness
+on the requested physical webcam have not yet been measured. The synthetic
+metric must not be substituted for a live result.</p>
+<h2>7. Real-time workflow and measured software performance</h2>
+<p>The app reads a frame, detects faces, and classifies only when exactly one
+face is visible with acceptable image quality. A smoothed maximum model
+score below 60% displays Uncertain. Low light, excessive brightness, low
+contrast, or blur pauses prediction. Scores reset on face loss or substantial
+position changes. The preview can be mirrored without changing inference
+orientation. Q releases the camera and closes the preview.</p>
+<p>An offline 100-frame MJPEG integration video, containing 10 blank frames and
+90 repeated public-domain face-image frames, ran at approximately <strong>44 FPS</strong>
+in the remote Linux environment. Average face-analysis time was approximately
+<strong>14 ms</strong> and the 95th percentile approximately <strong>18 ms</strong>. This timing includes
+a specific input and environment; it does not establish a Windows webcam
+frame rate. The image has no ground-truth expression label, so the model&#39;s
+displayed output is not an emotion-accuracy test. Exact figures are in
+reports/video_integration.json.</p>
+<p>The live quality/smoothing pipeline is not part of the raw classifier test
+metrics. To assess it, separately measure response delay, rejection rate,
+stable-pose consistency, and correctness on independent live labeled trials.</p>
+<h2>8. Testing and challenges</h2>
+<p>Automated checks cover generated-data reproducibility, class balance,
+train/test separation, training-only scaling, personal session holdout,
+JSON inference parity, invalid files, real image feature extraction,
+quality gates, temporal resets, complete-session writes, interrupted sessions,
+camera-open failure, Windows backend fallback, resource cleanup, Q exit,
+offline video decoding/annotation, and CLI training/evaluation.</p>
+<p>Important challenges are weak Haar feature proxies, lighting sensitivity,
+pose/face detection errors, glasses and occlusion, correlated frames, and
+limited real labeled data. HOG improves access to image appearance but can
+also learn irrelevant lighting or identity cues. Sad and Neutral are often
+hard to distinguish visually. Temporal smoothing improves stability at the
+cost of some delay.</p>
+<p>Windows-compatible package wheels were resolved for the pinned dependency
+set. Native Windows launcher, GUI, camera-permission, and physical-webcam
+acceptance remain local checks; their status is documented rather than
+presented as completed.</p>
+<h2>9. Future improvements</h2>
+<ol>
+<li>Collect a larger consented real dataset spanning people, cameras, lighting,
+glasses, and pose; use person-disjoint final evaluation.</li>
+<li>Replace detector rectangle proxies with facial landmarks and better
+alignment; use measured eyelid/mouth geometry.</li>
+<li>Compare logistic regression, SVM, and random forest on identical held-out
+sets. Tune settings with training-only cross-validation.</li>
+<li>Evaluate a CNN or a real dataset such as FER2013, with explicit license,
+preprocessing, class mapping, and person/data-leakage checks.</li>
+<li>Calibrate classifier scores and select rejection thresholds using separate
+validation data. Evaluate rejection coverage and error jointly.</li>
+<li>Add Angry, Fearful, Surprised, or Disgusted only after collecting suitable
+labels and validating those classes.</li>
+</ol>
+<h2>10. Live laptop evaluation — complete after local testing</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Result to enter</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Windows version / laptop / webcam</td>
+<td>Not yet measured</td>
+</tr>
+<tr>
+<td>Webcam backend / resolution</td>
+<td>Run doctor --camera 0</td>
+</tr>
+<tr>
+<td>Real training sessions / people</td>
+<td>Not yet collected</td>
+</tr>
+<tr>
+<td>Personal held-out accuracy and F1</td>
+<td>Copy from reports/personal/evaluation.html after training</td>
+</tr>
+<tr>
+<td>Independent live trial count / accuracy</td>
+<td>Not yet measured</td>
+</tr>
+<tr>
+<td>Uncertain / quality rejection rate</td>
+<td>Not yet measured</td>
+</tr>
+<tr>
+<td>Stable-pose consistency / transition delay</td>
+<td>Not yet measured</td>
+</tr>
+<tr>
+<td>Typical FPS and poor-light behavior</td>
+<td>Not yet measured</td>
+</tr>
+</tbody></table>
+<h2>11. References</h2>
+<ul>
+<li>OpenCV cascade-classifier tutorial: <a href="https://docs.opencv.org/4.12.0/db/d28/tutorial_cascade_classifier.html">https://docs.opencv.org/4.12.0/db/d28/tutorial_cascade_classifier.html</a></li>
+<li>OpenCV HOGDescriptor: <a href="https://docs.opencv.org/4.0.0/d5/d33/structcv_1_1HOGDescriptor.html">https://docs.opencv.org/4.0.0/d5/d33/structcv_1_1HOGDescriptor.html</a></li>
+<li>scikit-learn LogisticRegression: <a href="https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LogisticRegression.html">https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.LogisticRegression.html</a></li>
+<li>scikit-learn GroupShuffleSplit: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupShuffleSplit.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupShuffleSplit.html</a></li>
+<li>scikit-learn classification_report: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html">https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html</a></li>
+<li>Python Windows setup: <a href="https://docs.python.org/3/using/windows.html">https://docs.python.org/3/using/windows.html</a></li>
+<li>Public-domain image fixture: <a href="https://scikit-image.org/docs/0.25.x/api/skimage.data.html#skimage.data.astronaut">https://scikit-image.org/docs/0.25.x/api/skimage.data.html#skimage.data.astronaut</a></li>
+</ul>
+</main></body></html>

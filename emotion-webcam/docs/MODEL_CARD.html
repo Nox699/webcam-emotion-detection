@@ -1,0 +1,52 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Model card</title><style>body{font:16px/1.65 system-ui,sans-serif;background:#edf2f7;color:#182437;margin:0}main{max-width:1050px;margin:36px auto;background:white;padding:46px;border-radius:16px}h1{line-height:1.2;font-size:36px}h2{margin-top:34px;color:#245e6b}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:10px;text-align:left;border-bottom:1px solid #d6e0ea}thead{background:#e7f2f4}a{color:#276b7e}code{background:#edf2f7;padding:2px 5px}pre{overflow:auto;padding:15px;background:#edf2f7}p{overflow-wrap:anywhere}@media(max-width:700px){main{margin:0;padding:22px}table{display:block;overflow-x:auto}}@media print{body{background:white}main{margin:0;padding:0}h2{break-after:avoid}tr{break-inside:avoid}}</style></head><body><main><h1>Model card</h1>
+<p><strong>Intended use:</strong> course demonstration of supervised learning and local
+classification of consented, posed facial expressions for one laptop user.</p>
+<p><strong>Classes:</strong> Happy, Neutral, Sad. Alphabetical order is used consistently in
+training, JSON inference, bars, reports, and confusion matrices.</p>
+<p><strong>Architecture:</strong> StandardScaler followed by multiclass logistic regression
+(lbfgs, max_iter=2000, balanced class weights; C=1 for simulation and C=0.2
+for personal HOG models). The scaler is fit on training samples only. The
+held-out evaluation model is deployed without a full-dataset refit.</p>
+<p><strong>Demo data:</strong> 800 samples per class, generated from overlapping Gaussian
+distributions for two normalized feature proxies, clipped to [0, 1]. Seed 42.
+80/20 stratified split. Demo distributions are an illustrative assumption,
+not empirically estimated facial-expression measurements.</p>
+<p><strong>Personal data:</strong> explicitly labeled features from complete recording
+sessions. All three classes must have at least 10 samples in each session.
+At least five sessions are required. GroupShuffleSplit holds out 20% of
+session IDs (rounded upward); this is 20% of sessions, not necessarily 20%
+of rows when session sizes differ. No face images are stored by collection.</p>
+<p><strong>Feature extraction:</strong> OpenCV frontal-face Haar cascade; eye and smile Haar
+cascades on a 96×96 equalized face; rough eye rectangle ratio and smile width
+proxies. Personal model adds HOG on a 48×48 CLAHE-preprocessed face (16×16
+blocks, 8×8 stride/cells, nine bins, 900 coefficients). HOG captures image
+gradients; it is not a facial landmark estimator. Normal operation uses one
+frontal face at a time.</p>
+<p><strong>Live postprocessing:</strong> elapsed-time exponential smoothing (0.35-second
+time constant), reset on face loss, poor quality, IoU below 0.3, or a gap
+above one second. Highest score below 0.6 displays Uncertain by default.
+Brightness &lt;35 or &gt;225, contrast &lt;12, or normalized Laplacian variance &lt;25
+suppresses prediction. Thresholds are practical defaults, not calibrated
+clinical criteria. IoU continuity does not verify person identity: switching
+people at the same location can retain smoothing briefly. Press R to clear it.</p>
+<p><strong>Evaluation:</strong> accuracy, per-class precision/recall/F1, macro/weighted
+averages, confusion matrix, exact split indices and session IDs. Metrics
+evaluate raw held-out classifier predictions, without live smoothing or
+quality rejection. They do not measure temporal response or rejection-adjusted
+live accuracy. The report states its data source explicitly.</p>
+<p><strong>Known risks to validity:</strong> recording frames are correlated; session
+holdout reduces leakage but does not solve small-sample uncertainty.
+Training on one person is not evidence for performance on other people.
+Posed expressions are not spontaneous emotion. Sad/Neutral ambiguity, face
+alignment, pose, glasses, blur, lighting, and detector errors can dominate.
+The model can learn nuisance cues rather than expression. High scores can
+be wrong and are not calibrated emotion probabilities. No demographic,
+clinical, hiring, surveillance, or safety-critical validation was performed.</p>
+<p><strong>Privacy:</strong> numerical HOG features remain face-derived information.
+Keep the project local and protect personal.csv. Collection saves no raw
+images. Optional CLI <code>--output</code> is an explicit annotated-video export.</p>
+<p><strong>Release gate:</strong> complete LOCAL_ACCEPTANCE.md on the intended Windows
+laptop. For deployment beyond this assignment, obtain a larger consented
+real dataset, person-disjoint evaluations, appropriate intended-use review,
+and independent real-world validation.</p>
+</main></body></html>

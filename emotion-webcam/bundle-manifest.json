@@ -1,0 +1,245 @@
+{
+  "release": "1.0.1",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 111,
+      "sha256": "f14aa5f60608e7ffb56305f799e705c0e86db0f133e9f76f5ffe295e6378d966"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1084,
+      "sha256": "50f3aafff078ba468c4385aa849ebaf189e35137f31ace6430fd8cede0f1d367"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8120,
+      "sha256": "621398edea3b8339ab970b4325413930109ea5c57a9cb45127c09ffcfbd0731b"
+    },
+    {
+      "path": "START_HERE.html",
+      "bytes": 5466,
+      "sha256": "e4165e315012bec4ea741965559d787b2f5f3325ce25ed0877e2d10d0902ee82"
+    },
+    {
+      "path": "START_WINDOWS.bat",
+      "bytes": 254,
+      "sha256": "8a6a90d77a13e8d9e96be76b4e5910e89851ee809a50efcce3ee27305707e10c"
+    },
+    {
+      "path": "TEST_WINDOWS.bat",
+      "bytes": 161,
+      "sha256": "3d384309bd1414bcbd3aaec76886171af8a8eefe6ba51d0a225b49f7ef3fe9a1"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 819,
+      "sha256": "428fe3d65670f11bfd18637fceb17ef6b130faca9fb2c55a10b52fc9ff005a7b"
+    },
+    {
+      "path": "data/README.md",
+      "bytes": 463,
+      "sha256": "94945f4551124769915557106221f7a79180346138e5869793b509adc5aabbcf"
+    },
+    {
+      "path": "docs/ASSIGNMENT_REPORT.html",
+      "bytes": 15411,
+      "sha256": "9a83306ac354982363c211cc64278ebad2a510777362b2b27967361ef3a81838"
+    },
+    {
+      "path": "docs/ASSIGNMENT_REPORT.md",
+      "bytes": 11833,
+      "sha256": "12fd2f5a9f64c770df9d55721ddd5d17acc0b930a149b6be69479de956c7144b"
+    },
+    {
+      "path": "docs/LOCAL_ACCEPTANCE.html",
+      "bytes": 3983,
+      "sha256": "46300d609e8917778fb22ad6e60317b2985c2f6175b0527bf94a500f9be99a52"
+    },
+    {
+      "path": "docs/LOCAL_ACCEPTANCE.md",
+      "bytes": 2433,
+      "sha256": "0f7c916b11492bcc2ffe03e2cfa79338e241828ae637e9505dd854d77015fcac"
+    },
+    {
+      "path": "docs/MODEL_CARD.html",
+      "bytes": 4761,
+      "sha256": "cbec9323ebfe68d35341945067af21c0f30254c04fe38420d83ada4228d2c910"
+    },
+    {
+      "path": "docs/MODEL_CARD.md",
+      "bytes": 3607,
+      "sha256": "2356098de7f9ef6f73449a859d569b192575d9ac60fe7f1b5ace5eecae055849"
+    },
+    {
+      "path": "docs/TEST_REPORT.html",
+      "bytes": 5105,
+      "sha256": "9b0edd2311a94bdc0b5258e678427d113061627f637ef22b8a94ebc4792953f4"
+    },
+    {
+      "path": "docs/TEST_REPORT.md",
+      "bytes": 3562,
+      "sha256": "c0ec589e61f7352001357cf42ed20b30e643d100b2f2406d25fd278033e882d5"
+    },
+    {
+      "path": "docs/TROUBLESHOOTING.html",
+      "bytes": 4742,
+      "sha256": "340a71fba451427f125272b690427854ce3580dead7f4b5b6cecfa0a9a58a921"
+    },
+    {
+      "path": "docs/TROUBLESHOOTING.md",
+      "bytes": 3240,
+      "sha256": "54f50e9f99910f672f245a079b6efb06eb6980f1a64f0f0db86b04327ecb68fb"
+    },
+    {
+      "path": "docs/camera_preview.png",
+      "bytes": 505385,
+      "sha256": "6c960d8fdc0b8c948275c66b5c85717accfd185f4131662e0f671f56f7c8986d"
+    },
+    {
+      "path": "docs/collection_preview.png",
+      "bytes": 502302,
+      "sha256": "c7d4eda664ddd93359b693989bac533bb825cbb51fe5251dd06cd4cf593d86f1"
+    },
+    {
+      "path": "emotion_app/__init__.py",
+      "bytes": 104,
+      "sha256": "cca0177f361c47512ab4b575029d8e626348179d924b9ca3bd5f34e807a1b7e2"
+    },
+    {
+      "path": "emotion_app/__main__.py",
+      "bytes": 7178,
+      "sha256": "ce70c13042ca4f3d0f7f4d53c4b7df3d35ea823b55f025f5435c136411d71a78"
+    },
+    {
+      "path": "emotion_app/camera.py",
+      "bytes": 10734,
+      "sha256": "1d63f5992c0adc1fa0a8a8b9158393846145f0244b7bdb49a8698208a05937aa"
+    },
+    {
+      "path": "emotion_app/collection.py",
+      "bytes": 2481,
+      "sha256": "4e87df1771c29eb53f9b0220f06136d02fe685e48ab8a903c9990602753f6d90"
+    },
+    {
+      "path": "emotion_app/config.py",
+      "bytes": 494,
+      "sha256": "ab0ff429f190147fbf9a4c755274c113f26c2fd808dd6c4eb4a659cbde9e36fb"
+    },
+    {
+      "path": "emotion_app/data.py",
+      "bytes": 5162,
+      "sha256": "6906061a40c49672e8573788d218403c508472dd1a001689309b98f751fdc6f1"
+    },
+    {
+      "path": "emotion_app/display.py",
+      "bytes": 3953,
+      "sha256": "cce7771874bc3fe02adfc58b2b44ca1ed8dae2d134e0678217607004032d4d5a"
+    },
+    {
+      "path": "emotion_app/launcher.py",
+      "bytes": 7326,
+      "sha256": "dc7b090bdbee6170a09fd05e96539835bd8768d6a1278f5be80f15b8751b683f"
+    },
+    {
+      "path": "emotion_app/model.py",
+      "bytes": 6221,
+      "sha256": "509ae8e1ef914b165d15895db82ad2c447524a43e82f83b002ca50abc0f444cc"
+    },
+    {
+      "path": "emotion_app/reporting.py",
+      "bytes": 5205,
+      "sha256": "b0ed2246eec2f163f50caddfd295d035ec34dd3d5e5db98246f89951ec397dd1"
+    },
+    {
+      "path": "emotion_app/storage.py",
+      "bytes": 759,
+      "sha256": "7f5196cac1450ba19979f888fd49c165e6367e3c77854b87c7bb5a83743c2eb0"
+    },
+    {
+      "path": "emotion_app/vision.py",
+      "bytes": 5471,
+      "sha256": "5113f1762a6e80a2d7d8d311d2134998cc1669da39f8c5b3930345e8faf1c808"
+    },
+    {
+      "path": "models/demo.json",
+      "bytes": 2189,
+      "sha256": "ccbb61d3eebd2ca8c8674792c63ef8f15e1cbdca6fb7f8b6ea21363c78529d41"
+    },
+    {
+      "path": "reports/demo/confusion_matrix.png",
+      "bytes": 50963,
+      "sha256": "a88ef83e68335b9554b7f1b64033c91494d473f22761f7ef5c410a64743e0924"
+    },
+    {
+      "path": "reports/demo/evaluation.html",
+      "bytes": 70891,
+      "sha256": "f07f33b45c644f7e50d0093729d64943490e848628fc1c9b18ee75c9121dda87"
+    },
+    {
+      "path": "reports/demo/metrics.json",
+      "bytes": 24205,
+      "sha256": "ae65a58f2636941b375a39d1f8c586215c82c1cd9196b4b3be7607afddc68fa6"
+    },
+    {
+      "path": "reports/demo/simulated_dataset.csv",
+      "bytes": 102410,
+      "sha256": "56e07ad3cc76d56757413976c16c01e92aa5e5141aca117d7b05a67e01054ba8"
+    },
+    {
+      "path": "reports/software-tests.txt",
+      "bytes": 5342,
+      "sha256": "cbd488c1d09f671215ddc71fab844639fc8f45e0bf3dedd47ea97cf9970adc8e"
+    },
+    {
+      "path": "reports/video_integration.json",
+      "bytes": 473,
+      "sha256": "8d7652c87cad9e25a21fb2a4e3a01c690baaa9d88eac5f56f61f868d50babb47"
+    },
+    {
+      "path": "reports/windows_dependency_check.json",
+      "bytes": 2556,
+      "sha256": "2f6e0594da26a5f8ee0e6fbe20a776d5b1b16236cb280903bd96eb1718ed6929"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 387,
+      "sha256": "680cbe2caefe496396815839ac627336ebd46ed955bf2a8480d5e811be582664"
+    },
+    {
+      "path": "scripts/bootstrap_windows.ps1",
+      "bytes": 3513,
+      "sha256": "3f628a6e386d9717d2a9e8aa806c8929cfa1b1eb0ee9e6ab7df98fb7bc7ba5cb"
+    },
+    {
+      "path": "scripts/check_runtime.py",
+      "bytes": 1052,
+      "sha256": "271bbcd801e746717b72252297277d56863618702897bc53faba01bcb0b9a24e"
+    },
+    {
+      "path": "start.sh",
+      "bytes": 440,
+      "sha256": "b407336a60e486fef07fd26145249b467fddb9fb74dff747c928385754e58e7a"
+    },
+    {
+      "path": "tests/__init__.py",
+      "bytes": 83,
+      "sha256": "814e7a22a3374b9b6c0a68b532b16f280ae0ab132e067bee8661516984b336ed"
+    },
+    {
+      "path": "tests/fixtures/face.png",
+      "bytes": 139052,
+      "sha256": "eb4e0735e0b897c0383227a7f9f977b5fe3d2acd76a3b1d9b667bd1249639a59"
+    },
+    {
+      "path": "tests/test_app.py",
+      "bytes": 21223,
+      "sha256": "b854a60d292489fd4dab5de5670145ea77d476fc66231d3b492cfe50228dc5e9"
+    },
+    {
+      "path": "tests/test_bootstrap.py",
+      "bytes": 2524,
+      "sha256": "9af3cf346c6aac8056d8a911c53dc358b6ade5f4155e53d6d29a1aaa9726faa8"
+    }
+  ]
+}
